@@ -1,0 +1,28 @@
+services:
+  # Node.js service
+  cid_api:
+    container_name: cid_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4300:4300"
+    environment:
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+    depends_on:
+      - cid_db
+    links:
+      - cid_db
+    volumes:
+      - .:/usr/app
+
+  # PostgreSQL service
+  cid_db:
+    container_name: cid_db
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
