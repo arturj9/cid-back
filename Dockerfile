@@ -18,8 +18,6 @@ COPY . .
 # Configurar Prisma, se necessário
 RUN npx prisma generate
 
-RUN npx prisma migrate deploy
-
 # Exponha a porta que a aplicação vai ouvir
 EXPOSE 4300
 
