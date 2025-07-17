@@ -22,4 +22,4 @@ RUN npx prisma generate
 EXPOSE 4300
 
 # Comando para rodar a aplicação
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev", "&&", "npx", "prisma", "migrate", "deploy"]

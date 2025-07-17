@@ -15,7 +15,6 @@ services:
       - cid_db
     volumes:
       - .:/usr/app
-    command: npx prisma migrate deploy
 
   # PostgreSQL service
   cid_db:
