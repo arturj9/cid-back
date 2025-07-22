@@ -7,8 +7,6 @@ export const measurementRoutes = Router();
 const measurementController = new MeasurementController();
 const ensureAuth = new EnsureAuth();
 
-// Criar uma nova medição (não precisa de auth, depende de sua regra)
 measurementRoutes.post("/", measurementController.create);
 
-// Listar últimas medições (requer autenticação)
 measurementRoutes.get("/list", ensureAuth.handle, measurementController.list);

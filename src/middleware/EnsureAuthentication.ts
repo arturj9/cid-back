@@ -1,11 +1,10 @@
-import { env } from 'env';
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import { TokenAuthorizationMissingError } from 'service/error/TokenAuthorizationMissingError';
+import { env } from "env";
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { TokenAuthorizationMissingError } from "service/error/TokenAuthorizationMissingError";
 
 interface JwtPayload {
-  sub: string;
-  isAdmin: boolean;
+  subject: string;
 }
 
 export class EnsureAuth {
@@ -17,11 +16,11 @@ export class EnsureAuth {
         throw new TokenAuthorizationMissingError();
       }
 
-      const [, token] = authHeader.split(' ');
+      const [, token] = authHeader.split(" ");
 
       const decoded = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
 
-      req.user = { id: decoded.sub };
+      req.user = { id: decoded.subject };
 
       return next();
     } catch (err) {

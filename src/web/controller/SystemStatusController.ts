@@ -12,6 +12,7 @@ export class SystemStatusController {
 
       return res.status(201).json({ ok: true });
     } catch (error) {
+      console.error("Error creating system status:", error);
       return res.status(500).json({ error: "Erro ao registrar status do sistema." });
     }
   }
